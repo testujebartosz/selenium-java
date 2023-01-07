@@ -1,40 +1,57 @@
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.InvalidArgumentException;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
+import exercises.ReUsable;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class SeleniumTest {
 
-    public static void main(String[] args) {
-        WebDriver driver = new FirefoxDriver();
-    }
+    private WebDriver driver;
 
     @Test
     public void openGooglePage() {
-        WebDriver driver = getDriver("chrome");
+        driver = ReUsable.getDriver("chrome");
+
         driver.manage().window().maximize();
         Dimension windowSize = new Dimension(200, 200);
         driver.manage().window().setSize(windowSize);
         driver.get("https://www.google.pl/");
+
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("window.open('https://www.onet.pl/','blank','height=200,width=200')");
         driver.close();
     }
 
-    public WebDriver getDriver(String browser) {
-        switch (browser) {
-            case "firefox":
-                return new FirefoxDriver();
-            case "chrome":
-                return new ChromeDriver();
-            case "safari":
-                return new SafariDriver();
-            default:
-                throw new InvalidArgumentException("Invalid browser name");
-        }
+    @Test
+    public void asyncScriptTest() {
+        driver = ReUsable.getDriver("firefox");
+
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        driver.get("http://demo.guru99.com/V4/");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
+
+        long startTime = System.currentTimeMillis();
+        executor.executeAsyncScript("window.setTimeout(arguments[arguments.length -1],5000);");
+        System.out.println("Passed time: " + (System.currentTimeMillis() - startTime));
     }
+
+    @Test
+    public void executeScriptTest() {
+        driver = ReUsable.getDriver("chrome");
+
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        driver.get("http://demo.guru99.com/V4/");
+
+        WebElement button = driver.findElement(By.name("btnLogin"));
+        driver.findElement(By.name("uid")).sendKeys("mngr468050");
+        driver.findElement(By.name("password")).sendKeys("qAmugAp");
+
+        executor.executeScript("arguments[0].click();", button);
+        executor.executeScript("alert('Welcome to Guru99');");
+
+
+    }
+
 }
