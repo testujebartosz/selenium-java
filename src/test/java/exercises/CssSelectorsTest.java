@@ -9,7 +9,7 @@ public class CssSelectorsTest {
     private WebDriver driver;
 
     @Test
-    public void findElements() {
+    public void findElementsByCss() {
         driver = ReUsable.getDriver("chrome");
         driver.get("https://testeroprogramowania.github.io/selenium/basics.html");
 
