@@ -7,17 +7,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
 public class WebDriverManagerTest {
-
-    private WebDriver driver;
-
     @Test
     public void openBrowser() {
-
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(false);
         options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
-        driver = new ChromeDriver(options);
+        WebDriver driver = new ChromeDriver(options);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("alert('Hello')");
         driver.get("https://www.onet.pl");

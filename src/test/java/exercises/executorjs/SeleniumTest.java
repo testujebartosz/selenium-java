@@ -1,3 +1,5 @@
+package exercises.executorjs;
+
 import exercises.ReUsable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,7 +16,7 @@ public class SeleniumTest {
         driver = ReUsable.getDriver("chrome");
 
         driver.manage().window().maximize();
-        Dimension windowSize = new Dimension(200, 200);
+        Dimension windowSize = new Dimension(900, 600);
         driver.manage().window().setSize(windowSize);
         driver.get("https://www.google.pl/");
 

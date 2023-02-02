@@ -1,5 +1,6 @@
-package exercises;
+package exercises.dropdownselect;
 
+import exercises.ReUsable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
+import static exercises.ReUsable.checkOption;
+
 
 public class BasicActionsTest {
 
@@ -30,6 +34,8 @@ public class BasicActionsTest {
         WebElement usernameField = driver.findElement(By.xpath("//input[@name='username']"));
         usernameField.clear();
         usernameField.sendKeys("admin");
+        String value = usernameField.getAttribute("value");
+        System.out.println(value);
         //usernameField.sendKeys(Keys.ENTER);
         usernameField.sendKeys(Keys.TAB);
 
@@ -47,5 +53,14 @@ public class BasicActionsTest {
         for (WebElement optionCars : carsList) {
             System.out.println(optionCars.getText());
         }
+
+        System.out.println(checkOption("Audi", selectCar));
+        System.out.println(checkOption("Jeep", selectCar));
+
+        WebElement paraHidden = driver.findElement(By.cssSelector(".topSecret"));
+        System.out.println("By text: " + paraHidden.getText());
+        System.out.println("By attr value: " + paraHidden.getAttribute("value"));
+        System.out.println("By attr text context: " + paraHidden.getAttribute("textContent"));
+
     }
 }

@@ -1,5 +1,6 @@
-package exercises;
+package exercises.mytests;
 
+import exercises.ReUsable;
 import org.openqa.selenium.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
