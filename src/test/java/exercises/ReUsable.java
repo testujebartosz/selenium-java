@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.function.Function;
 
 public class ReUsable {
     public static WebDriver getDriver(final String browser) {

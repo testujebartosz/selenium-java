@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+import static exercises.ReUsable.getDriver;
 import static exercises.ReUsable.waitForElementToExist;
 
 @Listeners(value = {ListenerSampleTest.class})
@@ -20,7 +21,7 @@ public class FirstTest extends BaseTest{
 
     @Test
     public void firstTest() {
-        WebDriver driver = ReUsable.getDriver("chrome");
+        driver = getDriver("chrome");
         driver.get("https://testeroprogramowania.github.io/selenium/wait2.html");
         driver.findElement(By.id("clickOnMe")).click();
 
@@ -43,7 +44,7 @@ public class FirstTest extends BaseTest{
 
     @Test @Ignore
     public void secondFirstTest() {
-        WebDriver driver = ReUsable.getDriver("chrome");
+        WebDriver driver = getDriver("chrome");
         driver.get("https://testeroprogramowania.github.io/selenium/wait2.html");
         driver.findElement(By.id("clickOnMe")).click();
 

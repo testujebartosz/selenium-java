@@ -1,8 +1,11 @@
 package exercises.testng;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 public class BaseTest {
+
+    public static WebDriver driver;
 
     //przed całym zestawem testów
     @BeforeSuite
